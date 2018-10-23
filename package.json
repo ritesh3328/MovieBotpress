@@ -24,6 +24,6 @@
     "ghost-sync": "botpress ghost-sync",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "nithin t",
+  "author": "Ritesh Singh",
   "license": "AGPL-3.0-only"
 }
