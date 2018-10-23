@@ -1,0 +1,86 @@
+{
+  "version": "0.1",
+  "catchAll": {
+    "onReceive": [],
+    "next": [
+      {
+        "condition": "event.nlu.intent.is('forget')",
+        "node": "intent_matching"
+      }
+    ]
+  },
+  "startNode": "intent_matching",
+  "nodes": [
+    {
+      "id": "bda0320009",
+      "name": "booking-success",
+      "onEnter": [
+        "say #!builtin_text-pSsHWg"
+      ],
+      "onReceive": null,
+      "next": [
+        {
+          "condition": "true",
+          "node": "END"
+        }
+      ]
+    },
+    {
+      "id": "4f50a2e9fd",
+      "name": "default-response",
+      "next": [],
+      "onEnter": [
+        "say #!builtin_text-TtzrCV",
+        "resetUserVariable {\"name\":\"nickname\"}"
+      ],
+      "onReceive": null
+    },
+    {
+      "id": "a54a82eb7c",
+      "name": "intent_matching",
+      "onEnter": [],
+      "onReceive": null,
+      "next": [
+        {
+          "condition": "event.nlu.intent.is(\"bookmovie\")",
+          "node": "ask-movie-name"
+        },
+        {
+          "condition": "true",
+          "node": "default-response"
+        }
+      ]
+    },
+    {
+      "id": "d29fc6b771",
+      "name": "ask-movie-name",
+      "next": [
+        {
+          "condition": "true",
+          "node": "ask-ticket"
+        }
+      ],
+      "onEnter": [
+        "say #!builtin_text-z0J9qh"
+      ],
+      "onReceive": [
+        "setUserVariable {\"name\":\"nickname\",\"value\":\"{{event.text}}\",\"expiry\":\"never\"}",
+        "getUserVariable {\"name\":\"nickname\",\"output\":\"$r\"}"
+      ]
+    },
+    {
+      "id": "d58996d1e4",
+      "name": "ask-ticket",
+      "next": [
+        {
+          "condition": "true",
+          "node": "booking-success"
+        }
+      ],
+      "onEnter": [
+        "say #!builtin_text-J6IdnF"
+      ],
+      "onReceive": []
+    }
+  ]
+}
